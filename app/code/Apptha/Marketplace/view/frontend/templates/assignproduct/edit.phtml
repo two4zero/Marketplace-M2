@@ -33,32 +33,32 @@
  * Checking whether product add/edit
  */
 $nationalShippingAmount = $internationalShippingAmount = '';
-$productId = $this->getRequest ()->getParam ( 'id' );
-$product = $block->getProductData ( $productId );
-$productType = $product->getTypeId ();
+$productId = $this->getRequest()->getParam('id');
+$product = $block->getProductData($productId);
+$productType = $product->getTypeId();
 $isInStock = 1;
-$productCategoryIds = $mediaGallery = array ();
+$productCategoryIds = $mediaGallery = array();
 $assignprodSku = $assignprodPrice = $assignprodDesc = $assignprodDesc = $assignprodQty = $isInStock = '';
-if (! empty ( $productId )) {
- $productData = $block->getProductData ( $productId );
- $nationalShippingAmount = $productData->getNationalShippingAmount ();
- $internationalShippingAmount = $productData->getInternationalShippingAmount ();
- $assignprodDetails = $block->getAssignProductDetails ( $productId );
- $assignprodSku = $assignprodDetails ['sku'];
- $assignprodPrice = $assignprodDetails ['price'];
- $assignprodDesc = $assignprodDetails ['desc'];
- $assignprodQty = $assignprodDetails ['qty'];
- $isInStock = $assignprodDetails ['is_in_stock'];
+if (!empty($productId)) {
+    $productData = $block->getProductData($productId);
+    $nationalShippingAmount = $productData->getNationalShippingAmount();
+    $internationalShippingAmount = $productData->getInternationalShippingAmount();
+    $assignprodDetails = $block->getAssignProductDetails($productId);
+    $assignprodSku = $assignprodDetails['sku'];
+    $assignprodPrice = $assignprodDetails['price'];
+    $assignprodDesc = $assignprodDetails['desc'];
+    $assignprodQty = $assignprodDetails['qty'];
+    $isInStock = $assignprodDetails['is_in_stock'];
 }
 ?>
 <form class="form product form-product"
-    action="<?php echo $block->getEditAssignProductUrl() ?>"
+    action="<?php echo $block->getEditAssignProductUrl(); ?>"
     method="post" id="edit_assign_product" enctype="multipart/form-data"
     autocomplete="off">
     <input type="hidden" name="product_id" />
     <fieldset class="fieldset create info">
         <legend class="legend">
-            <span><?php echo __('Product Details') ?></span>
+            <span><?php echo __('Product Details'); ?></span>
         </legend>
         <br>
         <div class="field required">
@@ -70,11 +70,11 @@ if (! empty ( $productId )) {
 ?>
 <input type="hidden" id="prod-id" name="prod-id"
                 value="<?php echo $productId; ?>" /> <label for="sku"
-                class="label"><span><?php echo __('SKU') ?></span></label>
+                class="label"><span><?php echo __('SKU'); ?></span></label>
             <div class="control">
                 <input type="text" name="assignprod[sku]" id="prod-sku"
-                    title="<?php echo __('SKU') ?>" class="input-text"
-                    value="<?php echo $assignprodSku;?>"
+                    title="<?php echo __('SKU'); ?>" class="input-text"
+                    value="<?php echo $assignprodSku; ?>"
                     data-validate="{required:true}"> <input
                     type="hidden" id="currentsku" />
                 <div for="sku" generated="true"
@@ -83,9 +83,9 @@ if (! empty ( $productId )) {
                     <span></span><span></span><span></span><span></span><span></span>
                 </div>
                 <input type="hidden" id="sku_successmessage"
-                    value="<?php echo __('SKU is available');?>" /> <input
+                    value="<?php echo __('SKU is available'); ?>" /> <input
                     type="hidden" id="sku_errormessage"
-                    value="<?php echo __('SKU is not available');?>" />
+                    value="<?php echo __('SKU is not available'); ?>" />
             </div>
 <?php
 /**
@@ -93,51 +93,52 @@ if (! empty ( $productId )) {
  * Field:price
  */
 ?>
-<?php if($productType!="configurable"){?>
-<label for="price" class="label"><span><?php echo __('Price') ?></span></label>
+<?php if ($productType != "configurable") {
+    ?>
+<label for="price" class="label"><span><?php echo __('Price'); ?></span></label>
             <div class="control">
                 <input type="text" name="assignprod[price]"
                     id="prod-price"
                     value="<?php echo $assignprodPrice; ?>"
-                    title="<?php echo __('Price') ?>" class="input-text"
+                    title="<?php echo __('Price'); ?>" class="input-text"
                     data-validate="{required:true,'validate-greater-than-zero':true}">
             </div>
 <?php
- /**
-  * To add stock data for Product
-  * Field:qty,is in stock
-  */
- ?>
-    <label for="qty" class="label"><span><?php echo __('Quantity') ?></span></label>
+/**
+     * To add stock data for Product
+     * Field:qty,is in stock
+     */
+    ?>
+    <label for="qty" class="label"><span><?php echo __('Quantity'); ?></span></label>
             <div class="control">
                 <input type="text" name="assignprod[qty]" id="prod-qty"
-                    value="<?php echo $assignprodQty?>"
-                    title="<?php echo __('Quantity') ?>"
+                    value="<?php echo $assignprodQty; ?>"
+                    title="<?php echo __('Quantity'); ?>"
                     class="input-text"
                     data-validate="{'required':true,'validate-number':true}">
             </div>
 <?php
- /**
-  * Set in/out of stock
-  */
- ?>
+/**
+     * Set in/out of stock
+     */
+    ?>
 <select id="prod-is-in-stock" name="assignprod[is-in-stock]"
-                title="<?php echo __('Tax Class') ?>"
+                title="<?php echo __('Tax Class'); ?>"
                 class="validate-select">
                 <option value="1"
                     <?php
- 
- if ($isInStock == 1 || empty ( $isInStock )) {
-  echo 'selected="selected"';
- }
- ?>><?php echo __('In Stock'); ?></option>
+
+    if ($isInStock == 1 || empty($isInStock)) {
+        echo 'selected="selected"';
+    }
+    ?>><?php echo __('In Stock'); ?></option>
                 <option
                     <?php
- 
- if ($isInStock == 0) {
-  echo 'selected="selected"';
- }
- ?>
+
+    if ($isInStock == 0) {
+        echo 'selected="selected"';
+    }
+    ?>
                     value="0"><?php echo __('Out of Stock'); ?></option>
             </select>
         </div>
@@ -150,16 +151,16 @@ if (! empty ( $productId )) {
  */
 ?>
 
-<label for="product_information" class="label"><span><?php echo __('Product Information') ?></span></label>
+<label for="product_information" class="label"><span><?php echo __('Product Information'); ?></span></label>
         <div class="control">
             <textarea id="prod-description"
-                name="assignprod[description]" rows="2" cols="15"><?php echo $assignprodDesc;?></textarea>
+                name="assignprod[description]" rows="2" cols="15"><?php echo $assignprodDesc; ?></textarea>
         </div>
  <?php
- /**
-  * Submission of form
-  */
- ?>
+/**
+ * Submission of form
+ */
+?>
 
 </fieldset>
 
@@ -171,87 +172,87 @@ if (! empty ( $productId )) {
 <?php
 
 if ($productType == "configurable") {
- $childrenIds = array ();
- $baseConfigId = $product->getAssignProductId ();
- $attributes = $block->getAssignProductAttributes ( $product );
- $productAttributes = $block->getProductUsedAttributes ( $product );
- $products = $block->getAssociatedProducts ( $product );
- $associatedProducts = $products->getData ();
- ?>
-<h2><?php echo __("Edit Associated Variants");?></h2>
+    $childrenIds = array();
+    $baseConfigId = $product->getAssignProductId();
+    $attributes = $block->getAssignProductAttributes($product);
+    $productAttributes = $block->getProductUsedAttributes($product);
+    $products = $block->getAssociatedProducts($product);
+    $associatedProducts = $products->getData();
+    ?>
+<h2><?php echo __("Edit Associated Variants"); ?></h2>
 
     <table>
         <tr>
             <th></th>
-            <th><?php echo __('Price')?></th>
-            <th><?php echo __('Qty')?></th>
-<?php foreach($attributes as $productAttributeCode){?>
+            <th><?php echo __('Price'); ?></th>
+            <th><?php echo __('Qty'); ?></th>
+<?php foreach ($attributes as $productAttributeCode) {?>
 <th>
-<?php echo  $productAttributeCode->getProductAttribute()->getAttributeCode();?>
+<?php echo $productAttributeCode->getProductAttribute()->getAttributeCode(); ?>
 </th>
 <?php }?>
    </tr>
 <?php
- $ids = $baseSimpleProductIds = array ();
- if (! empty ( $associatedProducts )) {
-  foreach ( $associatedProducts as $associatedProduct ) {
-   $asscprod = $block->getProductData ( $associatedProduct ['entity_id'] );
-   $asscProdName = $asscprod->getName ();
-   $asscProdSku = $asscprod->getSku ();
-   $asscProdPrice = $asscprod->getPrice ();
-   $ids [] = $id = $associatedProduct ['entity_id'];
-   $stockData = $block->getProductStockDataQty ( $id );
-   $qty = $stockData->getQty ();
-   $baseSimpleProductIds [] = $asscprod->getConfigAssignSimpleId ();
-   ?>
+$ids = $baseSimpleProductIds = array();
+    if (!empty($associatedProducts)) {
+        foreach ($associatedProducts as $associatedProduct) {
+            $asscprod = $block->getProductData($associatedProduct['entity_id']);
+            $asscProdName = $asscprod->getName();
+            $asscProdSku = $asscprod->getSku();
+            $asscProdPrice = $asscprod->getPrice();
+            $ids[] = $id = $associatedProduct['entity_id'];
+            $stockData = $block->getProductStockDataQty($id);
+            $qty = $stockData->getQty();
+            $baseSimpleProductIds[] = $asscprod->getConfigAssignSimpleId();
+            ?>
 <tr>
             <td><input type="checkbox" name="variant[]" class="variant"
-                value="<?php echo $id;?>" /></td>
-            <td><input type="text" name="price[<?php echo $id;?>]"
-                value="<?php echo $asscProdPrice;?>"
+                value="<?php echo $id; ?>" /></td>
+            <td><input type="text" name="price[<?php echo $id; ?>]"
+                value="<?php echo $asscProdPrice; ?>"
                 data-validate="{required:true,'validate-greater-than-zero':true}" /></td>
-            <td><input type="text" name="qty[<?php echo $id;?>]"
-                value="<?php echo $qty;?>"
+            <td><input type="text" name="qty[<?php echo $id; ?>]"
+                value="<?php echo $qty; ?>"
                 data-validate="{required:true,'validate-greater-than-zero':true}" /></td>
-   <?php foreach($productAttributes as $proAttribute){?>
+   <?php foreach ($productAttributes as $proAttribute) {?>
 <td>
-<?php echo $_attributeValue = $asscprod->getResource ()->getAttribute ( $proAttribute )->getFrontend ()->getValue ( $asscprod );?>
+<?php echo $_attributeValue = $asscprod->getResource()->getAttribute($proAttribute)->getFrontend()->getValue($asscprod); ?>
 </td>
 <?php }?>
 </tr>
 <?php
-  }
-  $baseproduct = $block->getProductData ( $baseConfigId );
-  $baseProducts = $block->getAssociatedProducts ( $baseproduct );
-  $childProducts = $baseProducts->getData ();
-  foreach ( $childProducts as $childProduct ) {
-   $childrenIds [] = $childProduct ['entity_id'];
-  }
-  $result = array_diff ( $childrenIds, $baseSimpleProductIds );
- ?>
-<?php foreach ( $result as $resultProduct ) {
-    $resProd = $block->getProductData ( $resultProduct );
-    ?>
+}
+        $baseproduct = $block->getProductData($baseConfigId);
+        $baseProducts = $block->getAssociatedProducts($baseproduct);
+        $childProducts = $baseProducts->getData();
+        foreach ($childProducts as $childProduct) {
+            $childrenIds[] = $childProduct['entity_id'];
+        }
+        $result = array_diff($childrenIds, $baseSimpleProductIds);
+        ?>
+<?php foreach ($result as $resultProduct) {
+            $resProd = $block->getProductData($resultProduct);
+            ?>
         <tr>
             <td><input type="checkbox" name="variant[]" class="variant"
-                value="<?php echo $resultProduct;?>" /></td>
+                value="<?php echo $resultProduct; ?>" /></td>
             <td><input type="text"
-                name="price[<?php echo $resultProduct;?>]"
+                name="price[<?php echo $resultProduct; ?>]"
                 data-validate="{required:true,'validate-greater-than-zero':true}" /></td>
             <td><input type="text"
-                name="qty[<?php echo $resultProduct;?>]"
+                name="qty[<?php echo $resultProduct; ?>]"
                 data-validate="{required:true,'validate-greater-than-zero':true}" /></td>
-   <?php foreach($productAttributes as $proAttribute){?>
+   <?php foreach ($productAttributes as $proAttribute) {?>
 <td>
-<?php echo $_attributeValue = $resProd->getResource ()->getAttribute ( $proAttribute )->getFrontend ()->getValue ( $resProd ); ?>
+<?php echo $_attributeValue = $resProd->getResource()->getAttribute($proAttribute)->getFrontend()->getValue($resProd); ?>
 </td>
 <?php }?>
 </tr>
 <?php }?>
 <?php
- }
- $ids = array_unique ( $ids );
- ?>
+}
+    $ids = array_unique($ids);
+    ?>
 </table>
 <script>
 require([
@@ -276,7 +277,7 @@ require([
         var checked = $("#edit_assign_product input:checked").length > 0;
 
         if (!checked) {
-            alert("<?php echo __('Please check at least one Combination') ?>");
+            alert("<?php echo __('Please check at least one Combination'); ?>");
             return false;
         }
     });
@@ -287,32 +288,32 @@ require([
 ?>
 
 <?php
-$isSellerProductShipping = $this->isSellerProductShipping ();
+$isSellerProductShipping = $this->isSellerProductShipping();
 if ($isSellerProductShipping == 1) {
- ?>
+    ?>
 <div>
-        <label for="national_shipping_amount" class="label"><span><?php echo __('National Shipping Amount') ?></span><em
+        <label for="national_shipping_amount" class="label"><span><?php echo __('National Shipping Amount'); ?></span><em
             style="color: red; font-weight: normal; font-family: 'Open Sans', sans-serif; font-size: 12px;">*</em></label>
         <input type="text" name="national_shipping_amount"  id="national_shipping_amount"
-            value="<?php echo $nationalShippingAmount; ?>" title="<?php echo __('National Shipping Amount') ?>"
+            value="<?php echo $nationalShippingAmount; ?>" title="<?php echo __('National Shipping Amount'); ?>"
             class="input-text" data-validate="{required:true,'validate-greater-than-zero':true}">
     </div>
     <div>
-        <label for="international_shipping_amount" class="label"><span><?php echo __('International Shipping Price') ?></span><em
+        <label for="international_shipping_amount" class="label"><span><?php echo __('International Shipping Price'); ?></span><em
             style="color: red; font-weight: normal; font-family: 'Open Sans', sans-serif; font-size: 12px;">*</em></label>
         <input type="text" name="international_shipping_amount"  id="international_shipping_amount"
-            value="<?php echo $internationalShippingAmount; ?>" title="<?php echo __('International Shipping Amount') ?>"
+            value="<?php echo $internationalShippingAmount; ?>" title="<?php echo __('International Shipping Amount'); ?>"
             class="input-text"
             data-validate="{required:true,'validate-greater-than-zero':true}">
     </div>
-<?php  } ?>
+<?php }?>
 
    <div class="actions-toolbar">
         <div class="primary">
             <button id="btn_save_assign_product" type="submit"
                 class="action submit primary"
-                title="<?php echo __('Save') ?>">
-                <span><?php echo __('Save') ?></span>
+                title="<?php echo __('Save'); ?>">
+                <span><?php echo __('Save'); ?></span>
             </button>
         </div>
     </div>

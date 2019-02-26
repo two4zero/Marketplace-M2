@@ -23,26 +23,26 @@
  * @copyright Copyright (c) 2017 Apptha. (http://www.apptha.com)
  * @license http://www.apptha.com/LICENSE.txt
  */
-$sellerProfileDetails = $block->getSellerProfile ();
-$sellerDetails = $sellerProfileDetails ['seller_details'];
-$countryDatas = $sellerProfileDetails ['country_list'];
-$logoImage = $sellerProfileDetails ['logo_image'];
-$bannerImage = $sellerProfileDetails ['banner_image'];
-$objectModelManager = \Magento\Framework\App\ObjectManager::getInstance ();
+$sellerProfileDetails = $block->getSellerProfile();
+$sellerDetails = $sellerProfileDetails['seller_details'];
+$countryDatas = $sellerProfileDetails['country_list'];
+$logoImage = $sellerProfileDetails['logo_image'];
+$bannerImage = $sellerProfileDetails['banner_image'];
+$objectModelManager = \Magento\Framework\App\ObjectManager::getInstance();
 ?>
-<h2><?php echo __('Store Information');?></h2>
+<h2><?php echo __('Store Information'); ?></h2>
 <form class="form form-edit-account " enctype="multipart/form-data"
-action="<?php  echo $block->getUrl('*/*/saveprofile')?>" method="post"
+action="<?php echo $block->getUrl('*/*/saveprofile'); ?>" method="post"
 id="seller_profile_validate" data-mage-init='{"validation":{}}'>
 <fieldset class="fieldset"
-data-hasrequired="<?php  echo __('* Required Fields') ?>">
+data-hasrequired="<?php echo __('* Required Fields'); ?>">
 <div class="fields">
 <div class="field store_name required">
-<label for="store_name" class="label"><span><?php  echo __('Store Name') ?></span></label>
+<label for="store_name" class="label"><span><?php echo __('Store Name'); ?></span></label>
 <div class="control">
 <input type="text" name="store_name" alt="store_name"
 id="store_name"
-value="<?php echo $sellerDetails->getStoreName();?>"
+value="<?php echo $sellerDetails->getStoreName(); ?>"
 class="input-text" data-validate="{required:true}" />
 </div>
 </div>
@@ -50,10 +50,10 @@ class="input-text" data-validate="{required:true}" />
 
 <div class="fields">
 <div class="field contact required">
-<label for="contact" class="label"><span><?php  echo __('Contact Number') ?></span></label>
+<label for="contact" class="label"><span><?php echo __('Contact Number'); ?></span></label>
 <div class="control">
 <input type="text" name="contact"
-value="<?php echo $sellerDetails->getContact();?>" alt="Contact"
+value="<?php echo $sellerDetails->getContact(); ?>" alt="Contact"
 id="contact" class="input-text" data-validate="{required:true}" />
 <div id="phoneerror"></div>
 </div>
@@ -63,20 +63,20 @@ id="contact" class="input-text" data-validate="{required:true}" />
 
 <div class="fields">
 <div class="field address required">
-<label for="address" class="label"><span><?php  echo __('Address') ?></span></label>
+<label for="address" class="label"><span><?php echo __('Address'); ?></span></label>
 <div class="control">
 <textarea type="text" id="address" name="address" title="address"
-class="input-text address" data-validate="{required:true}"><?php echo strip_tags($sellerDetails->getAddress());?></textarea>
+class="input-text address" data-validate="{required:true}"><?php echo strip_tags($sellerDetails->getAddress()); ?></textarea>
 
 </div>
 </div>
 </div>
 <div class="fields">
 <div class="field state required">
-<label for="state" class="label"><span><?php  echo __('State') ?></span></label>
+<label for="state" class="label"><span><?php echo __('State'); ?></span></label>
 <div class="control">
 <input type="text" name="state" alt="state"
-value="<?php echo $sellerDetails->getState();?>" id="state"
+value="<?php echo $sellerDetails->getState(); ?>" id="state"
 class="input-text"
 data-validate="{required:true,'validate-state':true}">
 </div>
@@ -85,21 +85,22 @@ data-validate="{required:true,'validate-state':true}">
 </div>
 
 <div class="field country required">
-<label for="country" class="label"><span><?php /* @escapeNotVerified */ echo __('Country') ?></span></label>
+<label for="country" class="label"><span><?php /* @escapeNotVerified */echo __('Country'); ?></span></label>
 <div class="control">
 <select name="country" id="country" class="country" title="Country"
 data-validate="{'validate-select':true}">
-<option value=""><?php echo __("--Please Select--");?></option>
-                 <?php foreach ($countryDatas as $country) { ?>
+<option value=""><?php echo __("--Please Select--"); ?></option>
+                 <?php foreach ($countryDatas as $country) {
+    ?>
                  <option value="<?php echo $country['country_id']; ?>"
-<?php echo   $sellerDetails->getCountry() == $country['country_id'] ? ' selected="selected"' : ''; ?>>
+<?php echo $sellerDetails->getCountry() == $country['country_id'] ? ' selected="selected"' : ''; ?>>
                 <?php
-$countryModel = $objectModelManager->get ( 'Magento\Directory\Model\Country' );
-$country = $countryModel->loadByCode ( $country ['country_id'] );
-echo $country->getName ();
-?>
+$countryModel = $objectModelManager->get('Magento\Directory\Model\Country');
+    $country = $countryModel->loadByCode($country['country_id']);
+    echo $country->getName();
+    ?>
                 </option>
-                <?php } ?>
+                <?php }?>
               </select>
 </div>
 </div>
@@ -108,49 +109,49 @@ echo $country->getName ();
 /**
  * Checking whether seller store shipping enable or not
  */
-$isSellerStoreShipping = $this->isSellerStoreShipping ();
+$isSellerStoreShipping = $this->isSellerStoreShipping();
 if ($isSellerStoreShipping == 1) {
-?>
+    ?>
 
-      <label class="seo"><h3><?php echo __('Shipping Amount');?></h3></label>
+      <label class="seo"><h3><?php echo __('Shipping Amount'); ?></h3></label>
 <div class="fields">
 <div class="field shipping_Amount required">
-<label for="national_shipping_Amount" class="label"><span><?php echo __('National Shipping Amount') ?></span></label>
+<label for="national_shipping_Amount" class="label"><span><?php echo __('National Shipping Amount'); ?></span></label>
 <div class="control">
 <input type="text" name="national_shipping_amount"
 alt="national_shipping_amount"
-value="<?php echo round($sellerDetails->getNationalShippingAmount(),2);?>"
+value="<?php echo round($sellerDetails->getNationalShippingAmount(), 2); ?>"
 id="national_shipping_amount" class="input-text"
 data-validate="{required:true,'validate-greater-than-zero':true}">
-<span>[<?php echo ' '.$block->getBaseCurrencyCode().' '; ?>]</span>
+<span>[<?php echo ' ' . $block->getBaseCurrencyCode() . ' '; ?>]</span>
 </div>
 </div>
 </div>
 <div class="fields">
 <div class="field shipping_Amount required">
-<label for="international_shipping_Amount" class="label"><span><?php echo __('International Shipping Amount') ?></span></label>
+<label for="international_shipping_Amount" class="label"><span><?php echo __('International Shipping Amount'); ?></span></label>
 <div class="control">
 <input type="text" name="international_shipping_amount"
 alt="international_shipping_amount"
-value="<?php echo round($sellerDetails->getInternationalShippingAmount(),2);?>"
+value="<?php echo round($sellerDetails->getInternationalShippingAmount(), 2); ?>"
 id="international_shipping_amount" class="input-text"
 data-validate="{required:true,'validate-greater-than-zero':true}">
-<span>[<?php echo ' '.$block->getBaseCurrencyCode().' '; ?>]</span>
+<span>[<?php echo ' ' . $block->getBaseCurrencyCode() . ' '; ?>]</span>
 </div>
 </div>
 </div>
 <span>
       <?php echo __('Shipping Amount based on / per product'); ?>
       </span>
-      <?php } ?>
+      <?php }?>
 
 
       <div class="fields">
 <div class="field company_description">
-<label for="company_description" class="label"><span><?php  echo __('Company Description') ?></span></label>
+<label for="company_description" class="label"><span><?php echo __('Company Description'); ?></span></label>
 <textarea type="text" id="company_description"
 name="company_description" title="company_description"
-class="input-text companydesc wysiwyg-editor" aria-hidden="true"><?php echo strip_tags($sellerDetails->getDesc());?>
+class="input-text companydesc wysiwyg-editor" aria-hidden="true"><?php echo strip_tags($sellerDetails->getDesc()); ?>
        </textarea>
 </div>
 </div>
@@ -162,8 +163,8 @@ id="store_logo" />
 <div class="clear"></div>
 <span class="market_place_image_sizes"><?php echo __('Upload image size 150 X 110'); ?></span>
 <div style="clear: both;"></div>
-<?php if($sellerDetails->getLogoName()!=''){?>
-<img src="<?php echo $logoImage.$sellerDetails->getLogoName(); ?>"
+<?php if ($sellerDetails->getLogoName() != '') {?>
+<img src="<?php echo $logoImage . $sellerDetails->getLogoName(); ?>"
 alt="store logo" class="store_img" />
 <div style="clear: both;"></div>
 <input type="checkbox" name="remove_logo" value="1"> <?php echo __('Remove'); ?>
@@ -180,8 +181,8 @@ id="store_banner" />
 <div class="clear"></div>
 <span class="market_place_image_sizes"><?php echo __('Upload image size 1100 X 230'); ?></span>
 <div style="clear: both;"></div>
-<?php if($sellerDetails->getBannerName()!=''){?>
-<img src="<?php echo $bannerImage.$sellerDetails->getBannerName(); ?>"
+<?php if ($sellerDetails->getBannerName() != '') {?>
+<img src="<?php echo $bannerImage . $sellerDetails->getBannerName(); ?>"
 alt="store banner" class="store_img" />
 <div style="clear: both;"></div>
 <input type="checkbox" name="remove_banner" value="1"> <?php echo __('Remove'); ?>
@@ -190,15 +191,15 @@ alt="store banner" class="store_img" />
 </div>
 <div id="errorbannermsg"></div>
 <div class="socialmedia">
-<label class="seo"><h3><?php echo __('Social Media');?></h3></label>
+<label class="seo"><h3><?php echo __('Social Media'); ?></h3></label>
 <div class="fields">
 <div class="field twitter_id">
-<label for="twitter_id" class="label"><span><?php  echo __('Twitter Page Url') ?></span></label>
+<label for="twitter_id" class="label"><span><?php echo __('Twitter Page Url'); ?></span></label>
 <div class="control">
 <input type="text"
 placeholder="Ex: https://www.twitter.com/example"
 name="twitter_id" alt="Twitter Id"
-value="<?php echo $sellerDetails->getTwitterId();?>"
+value="<?php echo $sellerDetails->getTwitterId(); ?>"
 id="twitter_id" class="input-text"
 data-validate="{'validate-url':true}">
 </div>
@@ -207,12 +208,12 @@ data-validate="{'validate-url':true}">
 
 <div class="fields">
 <div class="field facebook_id">
-<label for="facebook_id" class="label"><span><?php  echo __('Facebook Page Url') ?></span></label>
+<label for="facebook_id" class="label"><span><?php echo __('Facebook Page Url'); ?></span></label>
 <div class="control">
 <input type="text"
 placeholder="Ex: https://www.facebook.com/example"
 name="facebook_id" alt="facebook_id" id="facebook_id"
-value="<?php echo $sellerDetails->getFacebookId();?>"
+value="<?php echo $sellerDetails->getFacebookId(); ?>"
 class="input-text"
 data-validate="{'validate-url':true}">
 </div>
@@ -221,11 +222,11 @@ data-validate="{'validate-url':true}">
 
 <div class="fields">
 <div class="field linked_id">
-<label for="linked_id" class="label"><span><?php  echo __('Linkedin Page Url') ?></span></label>
+<label for="linked_id" class="label"><span><?php echo __('Linkedin Page Url'); ?></span></label>
 <div class="control">
 <input type="text"
 placeholder="Ex: https://www.linkedin.com/company/example"
-value="<?php echo $sellerDetails->getLinkedId();?>"
+value="<?php echo $sellerDetails->getLinkedId(); ?>"
 class="input-text" name="linked_id" alt="linked_id"
 id="linked_id"
 data-validate="{'validate-url':true}">
@@ -235,12 +236,12 @@ data-validate="{'validate-url':true}">
 
 <div class="fields">
 <div class="field google_id">
-<label for=" google_id" class="label"><span><?php  echo __('Google Plus Page Url') ?></span></label>
+<label for=" google_id" class="label"><span><?php echo __('Google Plus Page Url'); ?></span></label>
 <div class="control">
 <input type="text"
 placeholder="Ex: https://plus.google.com/s/example"
 name="google_id" alt="google_id" id="google_id"
-value="<?php echo $sellerDetails->getGoogleId();?>"
+value="<?php echo $sellerDetails->getGoogleId(); ?>"
 class="input-text"
 data-validate="{'validate-url':true}">
 </div>
@@ -248,36 +249,36 @@ data-validate="{'validate-url':true}">
 </div>
 </div>
 <div class="fields">
-<label class="seo"><h3><?php echo __('SEO Management');?></h3></label>
+<label class="seo"><h3><?php echo __('SEO Management'); ?></h3></label>
 <div class="field meta_keyword ">
-<label for="meta_keyword" class="label"><span><?php  echo __('Meta Keywords') ?></span></label>
+<label for="meta_keyword" class="label"><span><?php echo __('Meta Keywords'); ?></span></label>
 <textarea id="meta_keyword" name="meta_keyword" rows="5" cols="60"
-class="input-text "><?php echo $sellerDetails->getMetaKeywords();?></textarea>
+class="input-text "><?php echo $sellerDetails->getMetaKeywords(); ?></textarea>
 </div>
 </div>
 
 <div class="fields">
 <div class="field meta_description ">
-<label for="meta_description" class="label"><span><?php  echo __('Meta Description') ?></span></label>
+<label for="meta_description" class="label"><span><?php echo __('Meta Description'); ?></span></label>
 <textarea id="meta_description" name="meta_description" rows="5"
-cols="60" class="input-text "><?php echo $sellerDetails->getMetaDescription();?></textarea>
+cols="60" class="input-text "><?php echo $sellerDetails->getMetaDescription(); ?></textarea>
 </div>
 </div>
 
 <div class="fields">
-<label class="payment_hint required"><h3><?php echo __('Process Payment via Bank/Paypal Account');?></h3></label>
+<label class="payment_hint required"><h3><?php echo __('Process Payment via Bank/Paypal Account'); ?></h3></label>
 <div class="field payment-snipt required">
 
 <div class="input-box market_place_payment_process required">
 <label for="bank_pay" class="label"><?php echo __('Bank Payment'); ?>
-</label> <i><?php echo __('[Please enter your Account number, Bank Name with Branch and IFSC code]');?></i>
-<textarea name="bank_payment" id="bank_payment" class="input-text"><?php echo $sellerDetails->getBankPayment();?></textarea>
+</label> <i><?php echo __('[Please enter your Account number, Bank Name with Branch and IFSC code]'); ?></i>
+<textarea name="bank_payment" id="bank_payment" class="input-text"><?php echo $sellerDetails->getBankPayment(); ?></textarea>
 </div>
 <div class="clear"></div>
 <div class="input-box market_place_payment_process required">
-<label for="paypal_pay"><?php echo __('Paypal Id');?> </label>
+<label for="paypal_pay"><?php echo __('Paypal Id'); ?> </label>
 <input type="email" name="paypal_id" id="paypal_id"
-value="<?php echo $sellerDetails->getPaypalId();?>" value=""
+value="<?php echo $sellerDetails->getPaypalId(); ?>" value=""
 class="input-text ">
 <div class="validation-advice" id="advice-required-entry-paypal_id"></div>
 </div>
@@ -289,8 +290,8 @@ value="<?php echo $sellerDetails->getStoreUrl(); ?>" />
 <div class="field meta_keyword ">
 <input id="show_profile_link" onclick="updateShowProfileLink()"
 type="checkbox" name="show_profile"
-value="<?php echo $sellerDetails->getShowProfile();?>"
-<?php if($sellerDetails->getShowProfile() == 1){ echo 'checked';} ?> />
+value="<?php echo $sellerDetails->getShowProfile(); ?>"
+<?php if ($sellerDetails->getShowProfile() == 1) {echo 'checked';}?> />
 <label for="show_profile_link">Display your profile link in product
 detail page</label>
 </div>
@@ -366,7 +367,7 @@ require([
                 $('#errorlogomsg').show();
                 document
                     .getElementById("errorlogomsg")
-                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.'); ?>";
                 $('#errorlogomsg').css("color", "#e02b27");
                 logoFlag = 0;
                 return false;
@@ -376,7 +377,7 @@ require([
                 $('#errorlogomsg').show();
                 document
                     .getElementById("errorlogomsg")
-                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.'); ?>";
                 $('#errorlogomsg').css("color", "#e02b27");
                 logoFlag = 0;
                 return false;
@@ -387,7 +388,7 @@ require([
             $('#errorlogomsg').show();
             document
                 .getElementById("errorlogomsg")
-                .innerHTML = "<?php echo __('Invalid file format')?>";
+                .innerHTML = "<?php echo __('Invalid file format'); ?>";
             $('#errorlogomsg').css("color", "#e02b27");
             logoFlag = 0;
             return false;
@@ -411,7 +412,7 @@ require([
                 $('#errorbannermsg').show();
                 document
                     .getElementById("errorbannermsg")
-                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.'); ?>";
                 $('#errorbannermsg').css("color", "#e02b27");
                 bannerFlag = 0;
                 return false;
@@ -421,7 +422,7 @@ require([
                 $('#errorbannermsg').show();
                 document
                     .getElementById("errorbannermsg")
-                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.'); ?>";
                 $('#errorbannermsg').css("color", "#e02b27");
                 bannerFlag = 0;
                 return false;
@@ -432,7 +433,7 @@ require([
             $('#errorbannermsg').show();
             document
                 .getElementById("errorbannermsg")
-                .innerHTML = "<?php echo __('Invalid file format')?>";
+                .innerHTML = "<?php echo __('Invalid file format'); ?>";
             $('#errorbannermsg').css("color", "#e02b27");
             bannerFlag = 0;
             return false;
