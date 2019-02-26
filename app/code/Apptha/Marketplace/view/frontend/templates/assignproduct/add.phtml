@@ -284,67 +284,70 @@ require([
 require([
     'jquery',
     'mage/mage'
-], function($){
-$('.sku-update-loader').hide();
+], function ($) {
+    $('.sku-update-loader').hide();
     var assigndataForm = $('#add_assign_product');
     var assignproductsku;
     var skuAvailableFlag;
     var ignore = null;
-    assigndataForm.mage('validation', { ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
-        }).find('input:text').attr('autocomplete', 'off');
-    $('#btn_save_assign_product').on('click', function(e) {
-            $('#add_assign_product').submit();
-    });
-    var skuAvailableFlag=0;
-    $('#product_sku').keyup(function(){ 
-    $('.sku-update-loader').show();
-        assignproductsku= $('#product_sku').val(); 
-        if(assignproductsku.length!==0){
-          $('#sku-error').css("display", "none");
-          $('#product_sku').removeClass("mage-error");
-           if(currentsku!=assignproductsku  ){    
-           $.ajax({
-            type: "POST",
-            url: $('#sku_validate_url').val(),
-            data: {sku: assignproductsku},
-            success: function(transportdata){ 
-                  if(transportdata==0){
-                    $('.availablesku').html($('#sku_successmessage').val());   
-                    $('.availablesku').css("font-size", "1.2rem"); 
-                    $('.availablesku').css("color", "green");
-                    $("#btn_save_assign_product").prop("disabled", false);
-                    skuAvailableFlag=0; 
-                   } 
-                 else{
-                   $('.availablesku').html($('#sku_errormessage').val()); 
-                   skuAvailableFlag=1;  
-                   $('.availablesku').css("color", "#e02b27");
-                   $('.availablesku').css("font-size", "1.2rem"); 
-                   $('#sku').addClass("mage-error");
-                   } 
-              $('.sku-update-loader').hide();
-                  }
-            });  
-    }  
-        }
-       
-     if(productsku.length==0){
-     $('.sku-update-loader').hide();
-     $('.availablesku').css("display", "none"); 
-    } 
-    else{
-    $('.availablesku').css("display", "block"); 
-    }                              
-  });
 
-    $("#add_assign_product").submit(function(){
-            if(skuAvailableFlag == 0){
-            return true;    
-            }else{
-            $('#product_sku').focus();    
-            return false; 
+    assigndataForm
+        .mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        })
+        .find('input:text')
+        .attr('autocomplete', 'off');
+    $('#btn_save_assign_product').on('click', function (e) {
+        $('#add_assign_product').submit();
+    });
+    var skuAvailableFlag = 0;
+
+    $('#product_sku').keyup(function () {
+        $('.sku-update-loader').show();
+        assignproductsku = $('#product_sku').val();
+        if (assignproductsku.length !== 0) {
+            $('#sku-error').css("display", "none");
+            $('#product_sku').removeClass("mage-error");
+            if (currentsku != assignproductsku) {
+                $.ajax({
+                    type: "POST",
+                    url: $('#sku_validate_url').val(),
+                    data: { sku: assignproductsku },
+                    success: function (transportdata) {
+                        if (transportdata == 0) {
+                            $('.availablesku').html($('#sku_successmessage').val());
+                            $('.availablesku').css("font-size", "1.2rem");
+                            $('.availablesku').css("color", "green");
+                            $("#btn_save_assign_product").prop("disabled", false);
+                            skuAvailableFlag = 0;
+                        } else {
+                            $('.availablesku').html($('#sku_errormessage').val());
+                            skuAvailableFlag = 1;
+                            $('.availablesku').css("color", "#e02b27");
+                            $('.availablesku').css("font-size", "1.2rem");
+                            $('#sku').addClass("mage-error");
+                        }
+                        $('.sku-update-loader').hide();
+                    }
+                });
             }
-           
-    }); 
+        }
+
+        if (productsku.length == 0) {
+            $('.sku-update-loader').hide();
+            $('.availablesku').css("display", "none");
+        } else {
+            $('.availablesku').css("display", "block");
+        }
+    });
+
+    $("#add_assign_product").submit(function () {
+        if (skuAvailableFlag == 0) {
+            return true;
+        } else {
+            $('#product_sku').focus();
+            return false;
+        }
+    });
 });
 </script>

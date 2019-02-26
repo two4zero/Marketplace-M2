@@ -332,168 +332,180 @@ require([
         );
 });
 </script>
-<script type="text/javascript">
-
-     function updateShowProfileLink(){
-        if(document.getElementById("show_profile_link").checked){
+<script>
+function updateShowProfileLink() {
+    if (document.getElementById("show_profile_link").checked) {
         document.getElementById("show_profile_link").value = 1;
-        }else{
+    } else {
         document.getElementById("show_profile_link").value = 0;
-        }
-        }
-
-      var logoFlag=1;
-      var bannerFlag=1;
-      var errFlag = false;
-      require([
-         'jquery',
-         'mage/mage'
-     ], function($){
-   $('#errorlogomsg').hide();
-   $('#errorbannermsg').hide();
-   $("#phoneerror").hide();
-   $("#store_logo").change(function(){
-        var _URL = window.URL || window.webkitURL;
-        var file = $(this)[0].files[0];
-        img = new Image();
-        img.src = _URL.createObjectURL(file);
-        img.onload = function() {
-        imgwidth = this.width;
-        imgheight = this.height;
-        if (imgwidth < 150) {
-           $("#store_logo").focus();
-               $('#errorlogomsg').show();
-               document.getElementById("errorlogomsg").innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
-               $('#errorlogomsg').css("color","#e02b27");
-               logoFlag=0;
-              return false;
-           }
-        if (imgheight < 110) {
-           $("#store_logo").focus();
-               $('#errorlogomsg').show();
-               document.getElementById("errorlogomsg").innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
-               $('#errorlogomsg').css("color","#e02b27");
-               logoFlag=0;
-              return false;
-           }
-        }
-       if (!/(\.bmp|\.png|\.gif|\.jpg|\.jpeg)$/i.test(this.value)) {
-       $("#store_logo").focus();
-           $('#errorlogomsg').show();
-           document.getElementById("errorlogomsg").innerHTML = "<?php echo __('Invalid file format')?>";
-           $('#errorlogomsg').css("color","#e02b27");
-           logoFlag=0;
-          return false;
-       }
-        logoFlag=1;
-       $('#errorlogomsg').hide();
-     return true;
-   });
-
-   $("#store_banner").change(function(){
-        var _URL = window.URL || window.webkitURL;
-        var file = $(this)[0].files[0];
-        img = new Image();
-        img.src = _URL.createObjectURL(file);
-        img.onload = function() {
-        imgwidth = this.width;
-        imgheight = this.height;
-        if (imgwidth < 1100 ) {
-           $("#store_banner").focus();
-           $('#errorbannermsg').show();
-           document.getElementById("errorbannermsg").innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
-           $('#errorbannermsg').css("color","#e02b27");
-            bannerFlag=0;
-          return false;
-           }
-        if (imgheight < 230) {
-           $("#store_banner").focus();
-           $('#errorbannermsg').show();
-           document.getElementById("errorbannermsg").innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
-           $('#errorbannermsg').css("color","#e02b27");
-            bannerFlag=0;
-          return false;
-           }
-        }
-       if (!/(\.bmp|\.png|\.gif|\.jpg|\.jpeg)$/i.test(this.value)) {
-       $("#store_banner").focus();
-           $('#errorbannermsg').show();
-           document.getElementById("errorbannermsg").innerHTML = "<?php echo __('Invalid file format')?>";
-           $('#errorbannermsg').css("color","#e02b27");
-            bannerFlag=0;
-          return false;
-   }
-       bannerFlag=1;
-       $('#errorbannermsg').hide();
-      return true;
-   });
-
-   $("#seller_profile_validate").submit(function(){
-
-   var telephoneNumber = $("#contact").val();
-   var test_phone_number = /^(?=.*[0-9])[- +()0-9]+$/;
-   var test_phone_number1 = /^\+[1-9]{1}[0-9]{3,14}$/;
-   if(!test_phone_number.test(telephoneNumber) ){
-     $("#phoneerror").html("<?php echo __('Please fill correct telephone number'); ?>");
- $("#phoneerror").css("color", "#e02b27");
-         $("#phoneerror").css("font-size", "1.2rem");
-           errFlag = true;
-     }else{
-   errFlag = false;
-   }
-
-      var state = $("#state").val();
-   var state_regex = /^[a-zA-Z ]*$/;
-   if(!state_regex.test(state) ){
-     $("#stateerror").html("<?php echo __('Please fill correct state'); ?>");
- $("#stateerror").css("color", "#e02b27");
-         $("#stateerror").css("font-size", "1.2rem");
-
-           stateFlag = true;
-
-     }
-      else{
-   stateFlag = false;
-       }
-
-   if(stateFlag==1){
- $("#state").focus();
- return false;
+    }
 }
 
-    if(bannerFlag == 1 && logoFlag==1 && errFlag==false && stateFlag==false){
-   return true;
-         }
-         else if(bannerFlag == 0){
-        $("#store_banner").focus();
+var logoFlag = 1;
+var bannerFlag = 1;
+var errFlag = false;
+
+require([
+    'jquery',
+    'mage/mage'
+], function ($) {
+    $('#errorlogomsg').hide();
+    $('#errorbannermsg').hide();
+    $("#phoneerror").hide();
+    $("#store_logo").change(function () {
+        var _URL = window.URL || window.webkitURL;
+        var file = $(this)[0].files[0];
+
+        img = new Image();
+        img.src = _URL.createObjectURL(file);
+        img.onload = function () {
+            imgwidth = this.width;
+            imgheight = this.height;
+            if (imgwidth < 150) {
+                $("#store_logo").focus();
+                $('#errorlogomsg').show();
+                document
+                    .getElementById("errorlogomsg")
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                $('#errorlogomsg').css("color", "#e02b27");
+                logoFlag = 0;
+                return false;
+            }
+            if (imgheight < 110) {
+                $("#store_logo").focus();
+                $('#errorlogomsg').show();
+                document
+                    .getElementById("errorlogomsg")
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                $('#errorlogomsg').css("color", "#e02b27");
+                logoFlag = 0;
+                return false;
+            }
+        };
+        if (!/(\.bmp|\.png|\.gif|\.jpg|\.jpeg)$/i.test(this.value)) {
+            $("#store_logo").focus();
+            $('#errorlogomsg').show();
+            document
+                .getElementById("errorlogomsg")
+                .innerHTML = "<?php echo __('Invalid file format')?>";
+            $('#errorlogomsg').css("color", "#e02b27");
+            logoFlag = 0;
             return false;
-         }
-         else if(logoFlag ==0){
-         $("#store_logo").focus();
-         return false;
-         }
-         else if(errFlag == true){
-         $("#contact").focus();
-         $("#phoneerror").show();
-         return false;
-         }
-         else{
-         $("#store_logo").focus();
-         return false;
-         }
-  });
+        }
+        logoFlag = 1;
+        $('#errorlogomsg').hide();
+        return true;
+    });
+
+    $("#store_banner").change(function () {
+        var _URL = window.URL || window.webkitURL;
+        var file = $(this)[0].files[0];
+
+        img = new Image();
+        img.src = _URL.createObjectURL(file);
+        img.onload = function () {
+            imgwidth = this.width;
+            imgheight = this.height;
+            if (imgwidth < 1100) {
+                $("#store_banner").focus();
+                $('#errorbannermsg').show();
+                document
+                    .getElementById("errorbannermsg")
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                $('#errorbannermsg').css("color", "#e02b27");
+                bannerFlag = 0;
+                return false;
+            }
+            if (imgheight < 230) {
+                $("#store_banner").focus();
+                $('#errorbannermsg').show();
+                document
+                    .getElementById("errorbannermsg")
+                    .innerHTML = "<?php echo __('Please upload image in the mentioned size.')?>";
+                $('#errorbannermsg').css("color", "#e02b27");
+                bannerFlag = 0;
+                return false;
+            }
+        };
+        if (!/(\.bmp|\.png|\.gif|\.jpg|\.jpeg)$/i.test(this.value)) {
+            $("#store_banner").focus();
+            $('#errorbannermsg').show();
+            document
+                .getElementById("errorbannermsg")
+                .innerHTML = "<?php echo __('Invalid file format')?>";
+            $('#errorbannermsg').css("color", "#e02b27");
+            bannerFlag = 0;
+            return false;
+        }
+        bannerFlag = 1;
+        $('#errorbannermsg').hide();
+        return true;
+    });
+
+    $("#seller_profile_validate").submit(function () {
+        var telephoneNumber = $("#contact").val();
+        var test_phone_number = /^(?=.*[0-9])[- +()0-9]+$/;
+        var test_phone_number1 = /^\+[1-9]{1}[0-9]{3,14}$/;
+
+        if (!test_phone_number.test(telephoneNumber)) {
+            $("#phoneerror").html("<?php echo __('Please fill correct telephone number'); ?>");
+            $("#phoneerror").css("color", "#e02b27");
+            $("#phoneerror").css("font-size", "1.2rem");
+            errFlag = true;
+        } else {
+            errFlag = false;
+        }
+
+        var state = $("#state").val();
+        var state_regex = /^[a-zA-Z ]*$/;
+
+        if (!state_regex.test(state)) {
+            $("#stateerror").html("<?php echo __('Please fill correct state'); ?>");
+            $("#stateerror").css("color", "#e02b27");
+            $("#stateerror").css("font-size", "1.2rem");
+
+            stateFlag = true;
+        } else {
+            stateFlag = false;
+        }
+
+        if (stateFlag == 1) {
+            $("#state").focus();
+            return false;
+        }
+
+        if (bannerFlag == 1 && logoFlag == 1 && errFlag == false && stateFlag == false) {
+            return true;
+        } else if (bannerFlag == 0) {
+            $("#store_banner").focus();
+            return false;
+        } else if (logoFlag == 0) {
+            $("#store_logo").focus();
+            return false;
+        } else if (errFlag == true) {
+            $("#contact").focus();
+            $("#phoneerror").show();
+            return false;
+        } else {
+            $("#store_logo").focus();
+            return false;
+        }
+    });
 });
 </script>
 <script>
 require([
     'jquery',
     'mage/mage'
-], function($){
-   var dataForm = $('#seller_profile_validate');
+], function ($) {
+    var dataForm = $('#seller_profile_validate');
     var ignore = null;
-    dataForm.mage('validation', {
-            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
-        }).find('input:text').attr('autocomplete', 'off');
 
+    dataForm
+        .mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        })
+        .find('input:text')
+        .attr('autocomplete', 'off');
 });
 </script>
