@@ -98,81 +98,81 @@ if (count($productTypes) >= 1 && $productTypes[0] == 'virtual' || count($product
         </legend>
         <br>
         <div class="field required">
-        <input type="hidden" value="<?php echo $this->getRequest()->getParam('config') == '1' ? $this->getRequest()->getParam('config') : ""; ?>"  name="config" />
+            <input type="hidden" value="<?php echo $this->getRequest()->getParam('config') == '1' ? $this->getRequest()->getParam('config') : ""; ?>" name="config" />
             <div
                 <?php if (!empty($productId)) {echo 'style="display:none;"';}?>>
                 <label for="name" class="label label-attribute"><span><?php echo __('Attribute Set'); ?></span></label>
                 <div class="control control-attribute">
-                <?php if (!empty($productId) && $typeId == 'configurable') {?>
-                <input type="hidden" value="<?php echo $productData->getAttributeSetId(); ?>"  name="set" />
-                <?php }?>
-                <select id="attribute_set" <?php if (!empty($productId)) {echo 'disabled';}?>  name="set" <?php if (!empty($productId)) {echo __('disabled');}?>
+                    <?php if (!empty($productId) && $typeId == 'configurable') {?>
+                    <input type="hidden" value="<?php echo $productData->getAttributeSetId(); ?>" name="set" />
+                    <?php }?>
+                    <select id="attribute_set" <?php if (!empty($productId)) {echo 'disabled';}?> name="set" <?php if (!empty($productId)) {echo __('disabled');}?>
                         title="<?php echo __('Attribute Set'); ?>" class="validate-select" data-validate="{required:true}">
-                        <option  value="<?php echo $block->getDefaultAttributeSetId(); ?>"><?php echo __('Default'); ?></option>
-                    <?php
-                    $attributeSet = $block->getAttributeSet();
-                    foreach ($attributeSet as $set) {
-                        if ($set['label'] != 'Default') {
-                    ?>
-                    <option value="<?php echo $set['value']; ?>"><?php echo $set['label']; ?></option>
-                    <?php }
-                    }
-                    ?>
-                </select>
-          </div>
-<?php if ($typeId == 'configurable') {?>
-<input type="hidden" value="<?php echo $typeId; ?>" name="type" />
-<?php }?>
-<label for="type" class="label"><span><?php echo __('Product Type'); ?></span></label>
+                        <option value="<?php echo $block->getDefaultAttributeSetId(); ?>"><?php echo __('Default'); ?></option>
+                        <?php
+                        $attributeSet = $block->getAttributeSet();
+                        foreach ($attributeSet as $set) {
+                            if ($set['label'] != 'Default') {
+                        ?>
+                        <option value="<?php echo $set['value']; ?>"><?php echo $set['label']; ?></option>
+                        <?php }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <?php if ($typeId == 'configurable') {?>
+                <input type="hidden" value="<?php echo $typeId; ?>" name="type" />
+                <?php }?>
+                <label for="type" class="label"><span><?php echo __('Product Type'); ?></span></label>
                 <div class="control control-prototype">
                     <select id="product_type" <?php if (!empty($productId)) {echo 'disabled';}?>
-                        name="type"<?php if (!empty($productId)) {echo __('disabled');}?>  title="<?php echo __('Product Type'); ?>"
+                        name="type"<?php if (!empty($productId)) {echo __('disabled');}?> title="<?php echo __('Product Type'); ?>"
                         class="validate-select" data-validate="{required:true}">
                         <?php
                         foreach ($productTypes as $typeVal) {
                             $typeLabel = ucfirst($typeVal);
                         ?>
-                            <option value="<?php echo $typeVal; ?>"><?php echo __($typeLabel); ?></option>
-                            <?php }?>
-                            </select>
+                        <option value="<?php echo $typeVal; ?>"><?php echo __($typeLabel); ?></option>
+                        <?php }?>
+                    </select>
                 </div>
             </div>
-<?php
-/**
- * Get categories
- */
-$categories = $block->getStoreCategories(true, false, true);
-?>
-<div class="fieldset marketplace-category-type">
+            <?php
+            /**
+             * Get categories
+             */
+            $categories = $block->getStoreCategories(true, false, true);
+            ?>
+            <div class="fieldset marketplace-category-type">
                 <label for="category" class="label category-label"><span><?php echo __('Product Categories'); ?></span></label>
                 <div class="block-category">
-                <?php
-                /**
-                 * Check the Categories is not equal to empty
-                 */
-                if (!empty($categories)) {
-                    echo $block->alphabaticalOrder($categories, $productCategoryIds);
-                }
-                ?>
-            </div>
+                    <?php
+                    /**
+                     * Check the Categories is not equal to empty
+                     */
+                    if (!empty($categories)) {
+                        echo $block->alphabaticalOrder($categories, $productCategoryIds);
+                    }
+                    ?>
+                </div>
             </div>
             <label for="name" class="label"><span><?php echo __('Name'); ?></span></label>
             <div class="control">
-                <input type="text" name="product[name]" id="name"  value="<?php echo $name; ?>"  title="<?php echo __('Name'); ?>" class="input-text" data-validate="{required:true}">
+                <input type="text" name="product[name]" id="name" value="<?php echo $name; ?>" title="<?php echo __('Name'); ?>" class="input-text" data-validate="{required:true}">
             </div>
             <label for="sku" class="label"><span><?php echo __('SKU'); ?></span></label>
             <div class="control">
                 <input type="text" name="product[sku]" id="sku" value="<?php echo $sku; ?>"
-                    title="<?php echo __('SKU'); ?>" class="input-text"  data-validate="{required:true}">
-                    <input   type="hidden" id="currentsku"  value="<?php echo $sku; ?>" />
+                    title="<?php echo __('SKU'); ?>" class="input-text" data-validate="{required:true}">
+                <input type="hidden" id="currentsku" value="<?php echo $sku; ?>" />
                 <div for="sku" generated="true" class="available name-error" id="name-error"></div>
                 <div class="sku-update-loader cssload-jumping">
                     <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <input type="hidden" id="sku_successmessage"  value="<?php echo __('SKU is available'); ?>" />
+                <input type="hidden" id="sku_successmessage" value="<?php echo __('SKU is available'); ?>" />
                 <input type="hidden" id="sku_errormessage" value="<?php echo __('SKU is not available'); ?>" />
             </div>
-           <label for="price" class="label"
+            <label for="price" class="label"
                 <?php if ($typeId == 'configurable') {echo 'style="display:none;"';}?>><span><?php echo __('Price'); ?></span></label>
             <div class="control"
                 <?php if ($typeId == 'configurable') {echo 'style="display:none;"';}?>>
@@ -186,9 +186,9 @@ $categories = $block->getStoreCategories(true, false, true);
             <div class="field" id="special_price_section">
                 <label for="specialprice" class="label"><span><?php echo __('Special Price'); ?></span></label>
                 <div class="control">
-                <input type="text" name="product[specialprice]"
-                        id="specialprice"  value="<?php echo $specialPrice; ?>"
-                        title="<?php echo __('Special Price'); ?>"   data-validate="{'validate-greater-than-zero':true}"
+                    <input type="text" name="product[specialprice]"
+                        id="specialprice" value="<?php echo $specialPrice; ?>"
+                        title="<?php echo __('Special Price'); ?>" data-validate="{'validate-greater-than-zero':true}"
                         class="input-text"> <strong>[<?php echo $block->getBaseCurrency(); ?>]</strong>
                 </div>
 
@@ -203,7 +203,7 @@ $categories = $block->getStoreCategories(true, false, true);
                     <label for="specialpricetodate"><span><?php echo __('Special Price To Date'); ?>:</span></label>
                     <div class="control">
                         <input class="input-text " type="text"
-                            id="specialpricetodate"  name="product[specialpricetodate]"  value="<?php echo $specialPriceToDate; ?>" />
+                            id="specialpricetodate" name="product[specialpricetodate]" value="<?php echo $specialPriceToDate; ?>" />
                     </div>
                 </div>
             </div>
@@ -213,55 +213,61 @@ $categories = $block->getStoreCategories(true, false, true);
                     rows="2" cols="15"><?php echo $description; ?></textarea>
             </div>
             <div class="qty-stock">
-                <div><label for="qty" class="label"><span><?php echo __('Quantity'); ?></span><em style="color: red; font-weight: normal; font-family: 'Open Sans', sans-serif; font-size: 12px;">*</em></label>
-<div class="qty-input-alert"><?php if ($typeId != 'configurable') {?>
-<input type="text" name="product[quantity_and_stock_status][qty]"
-id="qty" value="<?php echo $qty; ?>"
-title="<?php echo __('Quantity'); ?>"
-class="input-text downloadable-quantity"
-data-validate="{'required':true,'validate-number':true}">
-<?php }?></div></div>
-<div>
- <select id="quantity_and_stock_status"
-                    name="product[quantity_and_stock_status][is_in_stock]"
-                    title="<?php echo __('Tax Class'); ?>"
-                    class="validate-select">
-                    <option value="1" <?php if ($isInStock == 1 || empty($isInStock)) {
-                            echo 'selected="selected"';
-                        }
-                        ?>><?php echo __('In Stock'); ?></option>
-                    <option
-                        <?php if ($isInStock == 0) {
-                            echo 'selected="selected"';
-                        }
-                        ?>
-                        value="0"><?php echo __('Out of Stock'); ?></option>
-                </select></div>
-<?php
-$isSellerProductShipping = $this->isSellerProductShipping();
-if ($isSellerProductShipping == 1) {
-    ?></div>
+                <div>
+                    <label for="qty" class="label"><span><?php echo __('Quantity'); ?></span><em style="color: red; font-weight: normal; font-family: 'Open Sans', sans-serif; font-size: 12px;">*</em></label>
+                    <div class="qty-input-alert">
+                        <?php if ($typeId != 'configurable') {?>
+                        <input type="text" name="product[quantity_and_stock_status][qty]"
+                            id="qty" value="<?php echo $qty; ?>"
+                            title="<?php echo __('Quantity'); ?>"
+                            class="input-text downloadable-quantity"
+                            data-validate="{'required':true,'validate-number':true}">
+                        <?php }?>
+                    </div>
+                </div>
+                <div>
+                    <select id="quantity_and_stock_status"
+                        name="product[quantity_and_stock_status][is_in_stock]"
+                        title="<?php echo __('Tax Class'); ?>"
+                        class="validate-select">
+                        <option value="1" <?php if ($isInStock == 1 || empty($isInStock)) {
+                                echo 'selected="selected"';
+                            }
+                            ?>><?php echo __('In Stock'); ?></option>
+                        <option
+                            <?php if ($isInStock == 0) {
+                                echo 'selected="selected"';
+                            }
+                            ?>
+                            value="0"><?php echo __('Out of Stock'); ?></option>
+                    </select>
+                </div>
+            <?php
+            $isSellerProductShipping = $this->isSellerProductShipping();
+            if ($isSellerProductShipping == 1) {
+            ?>
+            </div>
 
             <div>
                 <label for="national_shipping_amount" class="label"><span><?php echo __('National Shipping Amount'); ?></span><em
                     style="color: red; font-weight: normal; font-family: 'Open Sans', sans-serif; font-size: 12px;">*</em></label>
                 <input type="text" name="national_shipping_amount"
-                    id="national_shipping_amount"  value="<?php echo $nationalShippingAmount; ?>"  title="<?php echo __('National Shipping Amount'); ?>"  class="input-text"
+                    id="national_shipping_amount" value="<?php echo $nationalShippingAmount; ?>" title="<?php echo __('National Shipping Amount'); ?>" class="input-text"
                     data-validate="{required:true,'validate-greater-than-zero':true}">
             </div>
             <div>
                 <label for="international_shipping_amount" class="label"><span><?php echo __('International Shipping Price'); ?></span><em
                     style="color: red; font-weight: normal; font-family: 'Open Sans', sans-serif; font-size: 12px;">*</em></label>
-                <input type="text" name="international_shipping_amount"  id="international_shipping_amount" value="<?php echo $internationalShippingAmount; ?>"   title="<?php echo __('International Shipping Amount'); ?>"
-                    class="input-text"   data-validate="{required:true,'validate-greater-than-zero':true}">
+                <input type="text" name="international_shipping_amount" id="international_shipping_amount" value="<?php echo $internationalShippingAmount; ?>" title="<?php echo __('International Shipping Amount'); ?>"
+                    class="input-text" data-validate="{required:true,'validate-greater-than-zero':true}">
 
-<?php }?>
-</div>
+            <?php }?>
+            </div>
             <div id="weight_container"
                 <?php if ($weightFlag != 1) {echo 'style="display:none;"';}?>>
                 <label for="weight" class="label"><span><?php echo __('Weight'); ?></span></label>
-                <input class="weight-input validate-number" id="weight"  <?php if ($weightFlag != 1) {echo 'disabled';}?>
-                    name="product[weight]"   value="<?php echo $weight; ?>" type="text"> <span><?php echo __('lbs'); ?></span>
+                <input class="weight-input validate-number" id="weight" <?php if ($weightFlag != 1) {echo 'disabled';}?>
+                    name="product[weight]" value="<?php echo $weight; ?>" type="text"> <span><?php echo __('lbs'); ?></span>
             </div>
         </div>
     </fieldset>
@@ -269,16 +275,16 @@ if ($isSellerProductShipping == 1) {
     <div id="remove_images_for_product"></div>
     <div id="configurable_content_form"></div>
     <div id="base_image_for_product" style="display: none;">
-<?php if (!empty($baseImage)) {?>
-<input class="base_image" type="radio" name="base_image"
+        <?php if (!empty($baseImage)) {?>
+        <input class="base_image" type="radio" name="base_image"
             title="<?php echo __('base'); ?>"
             value="<?php echo $baseImage; ?>">
-<?php }?>
-</div>
-<?php
-$productAutoApproval = $block->getProductApproval();
-?>
-<div class="product_status"
+        <?php }?>
+    </div>
+    <?php
+    $productAutoApproval = $block->getProductApproval();
+    ?>
+    <div class="product_status"
         <?php
         if (empty($productId) && ($productAutoApproval == 0)) {
             echo __('style="display:none;"');
@@ -297,9 +303,9 @@ $productAutoApproval = $block->getProductApproval();
     <div class="fields">
         <div class="field meta_keyword ">
             <label for="meta_keyword" class="label"><span><?php echo __('Meta Keywords'); ?></span></label>
-            <textarea id="product_meta_keyword"   name="product[meta_keyword]" rows="5" cols="60" class="input-text ">
-     <?php echo $metakeyword; ?>
-     </textarea>
+            <textarea id="product_meta_keyword" name="product[meta_keyword]" rows="5" cols="60" class="input-text ">
+                <?php echo $metakeyword; ?>
+            </textarea>
         </div>
     </div>
     <div class="fields">
@@ -308,8 +314,8 @@ $productAutoApproval = $block->getProductApproval();
             <textarea id="product_meta_description"
                 name="product[meta_description]" rows="5" cols="60"
                 class="input-text ">
-    <?php echo $metaDescription; ?>
-    </textarea>
+                <?php echo $metaDescription; ?>
+            </textarea>
         </div>
     </div>
     <input type="hidden" id="sku_validate_url" name="sku_validate_url"
@@ -330,12 +336,12 @@ require([
     });
 });
 </script>
- <!-- Marketplace custom attribute section -->
-<?php
-$customAttributes = $block->geCustomAttributes();
-if ($customAttributes == 1) {
+    <!-- Marketplace custom attribute section -->
+    <?php
+    $customAttributes = $block->geCustomAttributes();
+    if ($customAttributes == 1) {
     ?>
-<input type="hidden"  value="<?php echo $block->getCustomAttributesUrl(); ?>"  name="custom_attributes_ajax_url"  id="custom_attributes_ajax_url" />
+    <input type="hidden" value="<?php echo $block->getCustomAttributesUrl(); ?>" name="custom_attributes_ajax_url" id="custom_attributes_ajax_url" />
     <div id="custom_attributes_loader" style="display: none;">...</div>
     <div id="custom_attributes"></div>
 <script>
@@ -385,16 +391,16 @@ require([
     });
 });
 </script>
-<?php }?>
-<?php echo $this->getChildHtml('marketplace_product_customoptions_js'); ?>
-<?php if ($productId != '') {?>
-<?php echo $this->getChildHtml('marketplace_product_downloadable_edit'); ?>
-<?php } else {?>
-<?php echo $this->getChildHtml('marketplace_product_downloadable'); ?>
-<?php }?>
-<?php echo $this->getChildHtml('marketplace_product_video_add'); ?>
+    <?php }?>
+    <?php echo $this->getChildHtml('marketplace_product_customoptions_js'); ?>
+    <?php if ($productId != '') {?>
+    <?php echo $this->getChildHtml('marketplace_product_downloadable_edit'); ?>
+    <?php } else {?>
+    <?php echo $this->getChildHtml('marketplace_product_downloadable'); ?>
+    <?php }?>
+    <?php echo $this->getChildHtml('marketplace_product_video_add'); ?>
 </form>
-<input type="hidden"  value="<?php echo $block->getCategoryTreeAjaxUrl(); ?>"  name="category_tree_ajax_url" id="category_tree_ajax_url" />
+<input type="hidden" value="<?php echo $block->getCategoryTreeAjaxUrl(); ?>" name="category_tree_ajax_url" id="category_tree_ajax_url" />
 <script>
 require([
     'jquery',
@@ -649,7 +655,8 @@ require([
     class="image_upload_form" id="image_upload_form">
     <input type="hidden" id="image_upload_ajax_url" class="images_list"
         name="image_upload_ajax_url"
-        value="<?php echo $block->getImageUploadAjaxUrl(); ?>" /> <label
+        value="<?php echo $block->getImageUploadAjaxUrl(); ?>" />
+    <label
         for="upload_product_images" class="label"><span><?php echo __('Images'); ?></span></label>
     <div id="images_list" class="images_list">
         <div class="image_holder image-placeholder">
@@ -657,41 +664,46 @@ require([
                 id="upload_product_images" multiple>
             <p class="image-placeholder-text"><?php echo __('Click here to add images.'); ?></p>
         </div>
-  <?php
-if (!empty($productId)) {
-    $baseImageName = '';
-    $mediaImageUrl = $block->getMediaImageUrl();
-    if (!empty($baseImage)) {
-        $baseImageNameArr = explode('.', $baseImage);
-        $baseImageName = $baseImageNameArr[0];
-    }
-    foreach ($mediaGallery['images'] as $image) {
-        if ($image['media_type'] == 'image' && !empty($baseImageName)) {
-            $imagePath = $image['file'];
-            ?>
- <span> <span class="image_close remove_image_container">x <input
-                type="hidden" class="remove_image" name="remove_image[]"
-                value="<?php echo $image['value_id']; ?>">
-        </span> <span class="base_image_container"> <input
-                class="base_image" type="radio"
-                <?php
-            if (strpos($imagePath, $baseImageName) !== false || $baseImage == $imagePath) {
-                echo 'checked="checked"';
+        <?php
+        if (!empty($productId)) {
+            $baseImageName = '';
+            $mediaImageUrl = $block->getMediaImageUrl();
+            if (!empty($baseImage)) {
+                $baseImageNameArr = explode('.', $baseImage);
+                $baseImageName = $baseImageNameArr[0];
             }
-            ?>
-                name="base_image" title="<?php echo __('base'); ?>"
-                value="<?php echo $imagePath; ?>">
-        </span> <img class="base_image_section"
-            src="<?php echo $mediaImageUrl . DIRECTORY_SEPARATOR . $imagePath; ?>"
-            alt="<?php echo $imagePath; ?>" height="200" width="200">
+            foreach ($mediaGallery['images'] as $image) {
+                if ($image['media_type'] == 'image' && !empty($baseImageName)) {
+                    $imagePath = $image['file'];
+        ?>
+        <span>
+            <span class="image_close remove_image_container">x
+                <input
+                    type="hidden" class="remove_image" name="remove_image[]"
+                    value="<?php echo $image['value_id']; ?>">
+            </span>
+            <span class="base_image_container">
+                <input
+                    class="base_image" type="radio"
+                    <?php
+                    if (strpos($imagePath, $baseImageName) !== false || $baseImage == $imagePath) {
+                        echo 'checked="checked"';
+                    }
+                    ?>
+                    name="base_image" title="<?php echo __('base'); ?>"
+                    value="<?php echo $imagePath; ?>">
+            </span>
+            <img class="base_image_section"
+                src="<?php echo $mediaImageUrl . DIRECTORY_SEPARATOR . $imagePath; ?>"
+                alt="<?php echo $imagePath; ?>" height="200" width="200">
         </span>
-  <?php
+        <?php
+                }
+            }
         }
-    }
-}
-?>
-<div for="selectBaseImage" generated="true" class="mage-error" id="selectBaseImage" style="display: none;"><?php echo __('Please select base image for your product'); ?></div>
- </div>
+        ?>
+    <div for="selectBaseImage" generated="true" class="mage-error" id="selectBaseImage" style="display: none;"><?php echo __('Please select base image for your product'); ?></div>
+    </div>
     <div class="cssload-jumping" id="image_upload_ajax_loader"
         style="display: none;">
         <span></span><span></span><span></span><span></span><span></span>
@@ -761,7 +773,7 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
     selectSubChildCustomOptionCount = selectSubChildCustomOptionCount + 1;
 }
 </script>
-<!-- Following div dynamically create custom options  -->
+<!-- Following div dynamically create custom options -->
 <div class="hidden-custom-option" style="display: none;">
     <div class="option-box" id="marketplace_custom_option_YYY">
         <!-- Div for removing custom option -->
@@ -770,36 +782,42 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
             <table id="product_option_XXX"
                 class="option-header form-list" cellpadding="0"
                 cellspacing="0">
-                <input type="hidden" id="product_option_XXX_is_delete"
-                    name="product[options][XXX][is_delete]" value="">
-                <input type="hidden"   id="product_option_XXX_previous_type"  name="product[options][XXX][previous_type]" value="">
-                <input type="hidden"    id="product_option_XXX_previous_group"  name="product[options][XXX][previous_group]"   value="">
-                <input type="hidden" id="product_option_XXX_id"   name="product[options][XXX][id]" value="XXX">
+                <input type="hidden" id="product_option_XXX_is_delete" name="product[options][XXX][is_delete]" value="">
+                <input type="hidden" id="product_option_XXX_previous_type" name="product[options][XXX][previous_type]" value="">
+                <input type="hidden" id="product_option_XXX_previous_group" name="product[options][XXX][previous_group]" value="">
+                <input type="hidden" id="product_option_XXX_id" name="product[options][XXX][id]" value="XXX">
                 <input type="hidden" id="product_option_XXX_option_id" name="product[options][XXX][option_id]" value="0">
                 <thead>
                     <tr>
-                        <th class="opt-title"><label class="required"><em>*</em> <?php echo __('Title'); ?></label>
+                        <th class="opt-title">
+                            <label class="required"><em>*</em> <?php echo __('Title'); ?></label>
                         </th>
-                        <th class="opt-type"><label class="required"><em>*</em> <?php echo __('Input Type'); ?></label></th>
-                        <th class="opt-req"><label><?php echo __('Is Required'); ?></label></th>
+                        <th class="opt-type">
+                            <label class="required"><em>*</em> <?php echo __('Input Type'); ?></label></th>
+                        <th class="opt-req">
+                            <label><?php echo __('Is Required'); ?></label></th>
                         <th class="a-right">
-                        <button id="delete_product_option_XXX" title="<?php echo __('Delete Option'); ?>"   type="button"
+                            <button id="delete_product_option_XXX" title="<?php echo __('Delete Option'); ?>" type="button"
                                 class="button scalable delete delete-product-option " onclick="removeMarketPlaceCustomOption(this)">
                                 <span><span><?php echo __('Delete Option'); ?></span></span>
-                            </button></th>
+                            </button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text"
-                            class="required-entry input-text"
-                            id="product_option_XXX_title"
-                            name="product[options][XXX][title]" value=""></td>
-                        <td><select
-                            onchange="changeMarketPlaceCustomOption(this, XXX)"
-                            name="product[options][XXX][type]"
-                            id="product_option_XXX_type"
-                            class="select validate-select" title="">
+                        <td>
+                            <input type="text"
+                                class="required-entry input-text"
+                                id="product_option_XXX_title"
+                                name="product[options][XXX][title]" value="">
+                        </td>
+                        <td>
+                            <select
+                                onchange="changeMarketPlaceCustomOption(this, XXX)"
+                                name="product[options][XXX][type]"
+                                id="product_option_XXX_type"
+                                class="select validate-select" title="">
                                 <option value="">-- <?php echo __('Please select'); ?> --</option>
                                 <optgroup
                                     label="<?php echo __('Text'); ?>">
@@ -820,19 +838,20 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
                                 <optgroup
                                     label="<?php echo __('Date'); ?>">
                                     <option value="date"><?php echo __('Date'); ?></option>
-                                    <option value="date_time"><?php echo __('Date'); ?> &amp; <?php
-        echo __('Time');
-        ?></option>
+                                    <option value="date_time"><?php echo __('Date'); ?> &amp; <?php echo __('Time'); ?></option>
                                     <option value="time"><?php echo __('Time'); ?></option>
                                 </optgroup>
-                        </select></td>
-                        <td class="opt-req"><select
-                            name="product[options][XXX][is_require]"
-                            id="product_option_XXX_is_require"
-                            class="select" title="">
+                            </select>
+                        </td>
+                        <td class="opt-req">
+                            <select
+                                name="product[options][XXX][is_require]"
+                                id="product_option_XXX_is_require"
+                                class="select" title="">
                                 <option value="1"><?php echo __('Yes'); ?></option>
                                 <option value="0"><?php echo __('No'); ?></option>
-                        </select></td>
+                            </select>
+                        </td>
                         <td>&nbsp;</td>
                     </tr>
                 </tbody>
@@ -855,28 +874,34 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
  */
 ?>
                     <th class="type-price">
-                    <label><?php echo __('Price'); ?></label>
+                        <label><?php echo __('Price'); ?></label>
                     </th>
                     <th class="type-type">
-                    <label><?php echo __('Price Type'); ?></label>
+                        <label><?php echo __('Price Type'); ?></label>
                     </th>
                     <th class="type-sku">
-                    <label><?php echo __('SKU'); ?></label>
+                        <label><?php echo __('SKU'); ?></label>
                     </th>
                     <th class="type-last last">
-                    <label><?php echo __('Max Characters'); ?></label>
+                        <label><?php echo __('Max Characters'); ?></label>
                     </th>
                 </tr>
                 <tr>
                     <td>
-                    <input type="text"  class="input-text validate-number product-option-price product-custom-option-price-val"
-                        id="product_option_CCC_price" name="product[options][CCC][price]" value=""></td>
-                    <td><select name="product[options][CCC][price_type]"  id="product_option_CCC_price_type" class="select product-option-price-type"  title="">
+                        <input type="text" class="input-text validate-number product-option-price product-custom-option-price-val"
+                            id="product_option_CCC_price" name="product[options][CCC][price]" value=""></td>
+                    <td>
+                        <select name="product[options][CCC][price_type]" id="product_option_CCC_price_type" class="select product-option-price-type" title="">
                             <option value="fixed"><?php echo __('fixed'); ?></option>
                             <option value="percent"><?php echo __('Percent'); ?></option>
-                    </select></td>
-                    <td><input type="text" class="input-text"   name="product[options][CCC][sku]" value=""></td>
-                    <td class="type-last last"><input type="text"  class="input-text validate-zero-or-greater"  name="product[options][CCC][max_characters]" value=""></td>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="input-text" name="product[options][CCC][sku]" value="">
+                    </td>
+                    <td class="type-last last">
+                        <input type="text" class="input-text validate-zero-or-greater" name="product[options][CCC][max_characters]" value="">
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -887,38 +912,60 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
             cellpadding="0" cellspacing="0">
             <tbody>
                 <tr class="headings">
-                    <th class="type-price"><label><?php echo __('Price'); ?></label></th>
-                    <th class="type-type"><label><?php echo __('Price Type'); ?></label></th>
-                    <th class="type-sku"><label><?php echo __('SKU'); ?></label></th>
-                    <th class="type-title"><label><?php echo __('Allowed File Extensions'); ?></label></th>
-                    <th class="last"><label><?php echo __('Maximum Image Size'); ?></label></th>
+                    <th class="type-price">
+                        <label><?php echo __('Price'); ?></label>
+                    </th>
+                    <th class="type-type">
+                        <label><?php echo __('Price Type'); ?></label>
+                    </th>
+                    <th class="type-sku">
+                        <label><?php echo __('SKU'); ?></label>
+                    </th>
+                    <th class="type-title">
+                        <label><?php echo __('Allowed File Extensions'); ?></label>
+                    </th>
+                    <th class="last">
+                        <label><?php echo __('Maximum Image Size'); ?></label>
+                    </th>
                 </tr>
                 <tr>
-                    <td><input
-                        class="input-text validate-zero-or-greater"
-                        type="text" name="product[options][CCC][price]"
-                        value=""></td>
-                    <td><select name="product[options][CCC][price_type]"
-                        id="product_option_CCC_price_type"
-                        class="select product-option-price-type"
-                        title="">
+                    <td>
+                        <input
+                            class="input-text validate-zero-or-greater"
+                            type="text" name="product[options][CCC][price]"
+                            value="">
+                    </td>
+                    <td>
+                        <select name="product[options][CCC][price_type]"
+                            id="product_option_CCC_price_type"
+                            class="select product-option-price-type"
+                            title="">
                             <option value="fixed"><?php echo __('fixed'); ?></option>
                             <option value="percent"><?php echo __('Percent'); ?></option>
-                    </select></td>
-                    <td><input type="text" class="input-text"
-                        name="product[options][CCC][sku]" value=""></td>
-                    <td><input class="input-text" type="text"
-                        name="product[options][CCC][file_extension]"
-                        value=""></td>
-                    <td class="type-last last" nowrap=""><input
-                        class="input-text" type="text"
-                        name="product[options][CCC][image_size_x]"
-                        value=""><?php echo __('x'); ?>&nbsp;
-<input class="input-text" type="text"
-                        name="product[options][CCC][image_size_y]"
-                        value=""><?php echo __('px') . '.'; ?>
-<br><?php echo __('leave blank if its not an image'); ?>
-                </td>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="input-text"
+                            name="product[options][CCC][sku]" value="">
+                    </td>
+                    <td>
+                        <input class="input-text" type="text"
+                            name="product[options][CCC][file_extension]"
+                            value="">
+                    </td>
+                    <td class="type-last last" nowrap="">
+                        <input
+                            class="input-text" type="text"
+                            name="product[options][CCC][image_size_x]"
+                            value="">
+                        <?php echo __('x'); ?>&nbsp;
+                        <input class="input-text" type="text"
+                            name="product[options][CCC][image_size_y]"
+                            value="">
+                        <?php echo __('px') . '.'; ?>
+                        <br>
+                        <?php echo __('leave blank if its not an image'); ?>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -930,25 +977,37 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
             cellpadding="0" cellspacing="0">
             <tbody>
                 <tr class="headings">
-                    <th class="type-price"><label><?php echo __('Price'); ?></label></th>
-                    <th class="type-type"><label><?php echo __('Price Type'); ?></label></th>
-                    <th class="last"><label><?php echo __('SKU'); ?></label></th>
+                    <th class="type-price">
+                        <label><?php echo __('Price'); ?></label>
+                    </th>
+                    <th class="type-type">
+                        <label><?php echo __('Price Type'); ?></label>
+                    </th>
+                    <th class="last">
+                        <label><?php echo __('SKU'); ?></label>
+                    </th>
                 </tr>
                 <tr>
-                    <td><input type="text"
-                        class="input-text validate-number product-option-price product-option-price-val-data"
-                        id="product_option_CCC_price"
-                        name="product[options][CCC][price]" value=""></td>
-                    <td><select name="product[options][CCC][price_type]"
-                        id="product_option_CCC_price_type"
-                        class="select product-option-price-type"
-                        title="">
+                    <td>
+                        <input type="text"
+                            class="input-text validate-number product-option-price product-option-price-val-data"
+                            id="product_option_CCC_price"
+                            name="product[options][CCC][price]" value="">
+                    </td>
+                    <td>
+                        <select name="product[options][CCC][price_type]"
+                            id="product_option_CCC_price_type"
+                            class="select product-option-price-type"
+                            title="">
                             <option value="fixed"><?php echo __('fixed'); ?></option>
                             <option value="percent"><?php echo __('Percent'); ?></option>
-                    </select></td>
-                    <td class="last"><input type="text"
-                        class="input-text type-sku"
-                        name="product[options][CCC][sku]" value=""></td>
+                        </select>
+                    </td>
+                    <td class="last">
+                        <input type="text"
+                            class="input-text type-sku"
+                            name="product[options][CCC][sku]" value="">
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -962,11 +1021,21 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
                 name="validation_CCC_result" value="">
             <thead>
                 <tr class="headings">
-                    <th class="type-title"><label class="required"> <em>*</em> <?php echo __('Title'); ?> </label></th>
-                    <th class="type-price"><label><?php echo __('Price'); ?></label></th>
-                    <th class="type-type"><label><?php echo __('Price Type'); ?></label></th>
-                    <th class="type-sku"><label><?php echo __('SKU'); ?></label></th>
-                    <th class="type-order"><label><?php echo __('Sort Order'); ?></label></th>
+                    <th class="type-title">
+                        <label class="required"> <em>*</em> <?php echo __('Title'); ?> </label>
+                    </th>
+                    <th class="type-price">
+                        <label><?php echo __('Price'); ?></label>
+                    </th>
+                    <th class="type-type">
+                        <label><?php echo __('Price Type'); ?></label>
+                    </th>
+                    <th class="type-sku">
+                        <label><?php echo __('SKU'); ?></label>
+                    </th>
+                    <th class="type-order">
+                        <label><?php echo __('Sort Order'); ?></label>
+                    </th>
                     <th class="type-butt last">&nbsp;</th>
                 </tr>
             </thead>
@@ -992,28 +1061,34 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
     <table>
         <tr id="product_option_CCC_select_AAA">
             <td>
-               <input type="hidden"  name="product[options][CCC][values][AAA][option_type_id]" value="-1"> <input type="hidden"  id="product_option_CCC_select_AAA_is_delete"
-                name="product[options][CCC][values][AAA][is_delete]" value="">
+                <input type="hidden" name="product[options][CCC][values][AAA][option_type_id]" value="-1"> <input type="hidden" id="product_option_CCC_select_AAA_is_delete"
+                    name="product[options][CCC][values][AAA][is_delete]" value="">
                 <input type="text" class="required-entry input-text select-type-title" id="product_option_CCC_select_AAA_title" name="product[options][CCC][values][AAA][title]" value=""></td>
             <td>
-            <input type="text" class="input-text validate-number product-option-price" id="product_option_CCC_select_AAA_price"
-                name="product[options][CCC][values][AAA][price]" value=""></td>
+                <input type="text" class="input-text validate-number product-option-price" id="product_option_CCC_select_AAA_price"
+                    name="product[options][CCC][values][AAA][price]" value=""></td>
             <td>
-            <select name="product[options][CCC][values][AAA][price_type]"
-                id="product_option_CCC_select_AAA_price_type"
-                class="select product-option-price-type" title="">
+                <select name="product[options][CCC][values][AAA][price_type]"
+                    id="product_option_CCC_select_AAA_price_type"
+                    class="select product-option-price-type" title="">
                     <option value="fixed"><?php echo __('fixed'); ?></option>
                     <option value="percent"><?php echo __('Percent'); ?></option>
-            </select>
+                </select>
             </td>
-            <td><input type="text" class="input-text"  name="product[options][CCC][values][AAA][sku]" value=""></td>
-            <td><input type="text"  class="validate-zero-or-greater input-text" name="product[options][CCC][values][AAA][sort_order]" value=""></td>
-            <td class="last"><span title="Delete row">
-                    <button id="delete_select_row_button"  title="Delete Row" type="button" class="button delete_select_row_button scalable delete delete-select-row icon-btn"
+            <td>
+                <input type="text" class="input-text" name="product[options][CCC][values][AAA][sku]" value="">
+            </td>
+            <td>
+                <input type="text" class="validate-zero-or-greater input-text" name="product[options][CCC][values][AAA][sort_order]" value="">
+            </td>
+            <td class="last">
+                <span title="Delete row">
+                    <button id="delete_select_row_button" title="Delete Row" type="button" class="button delete_select_row_button scalable delete delete-select-row icon-btn"
                         onclick="removeMarketPlaceChildSelectOption(this)" style="">
                         <span> <span><?php echo __('Delete Row'); ?></span></span>
                     </button>
-            </span></td>
+                </span>
+            </td>
         </tr>
     </table>
 </div>
