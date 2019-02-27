@@ -334,7 +334,7 @@ class Savedata extends \Magento\Framework\App\Action\Action {
      * @return void
      */
     public function saveImageForProduct($productId, $imagesPaths) {
-        if (count ( $imagesPaths ) >= 1) {
+        if ($imagesPaths && count ( $imagesPaths ) >= 1) {
             array_unique ( $imagesPaths );
 
             $productImage = $this->_objectManager->create ( 'Magento\Catalog\Model\Product' )->load ( $productId );
@@ -382,7 +382,11 @@ class Savedata extends \Magento\Framework\App\Action\Action {
      * @return void
      */
     public function removeImageForProduct($productId, $imagesIds) {
-        if (count ( $imagesIds ) < 1) {
+        if ($imagesIds) {
+            if (count ( $imagesIds ) < 1) {
+                return;
+            }
+        } else {
             return;
         }
         array_unique ( $imagesIds );
