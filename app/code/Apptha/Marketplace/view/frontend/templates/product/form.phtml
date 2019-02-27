@@ -230,7 +230,8 @@ if (count($productTypes) >= 1 && $productTypes[0] == 'virtual' || count($product
                         name="product[quantity_and_stock_status][is_in_stock]"
                         title="<?php echo __('Tax Class'); ?>"
                         class="validate-select">
-                        <option value="1" <?php if ($isInStock == 1 || empty($isInStock)) {
+                        <option value="1"
+                            <?php if ($isInStock == 1 || empty($isInStock)) {
                                 echo 'selected="selected"';
                             }
                             ?>><?php echo __('In Stock'); ?></option>
@@ -267,7 +268,8 @@ if (count($productTypes) >= 1 && $productTypes[0] == 'virtual' || count($product
                 <?php if ($weightFlag != 1) {echo 'style="display:none;"';}?>>
                 <label for="weight" class="label"><span><?php echo __('Weight'); ?></span></label>
                 <input class="weight-input validate-number" id="weight" <?php if ($weightFlag != 1) {echo 'disabled';}?>
-                    name="product[weight]" value="<?php echo $weight; ?>" type="text"> <span><?php echo __('lbs'); ?></span>
+                    name="product[weight]" value="<?php echo $weight; ?>" type="text">
+                <span><?php echo __('lbs'); ?></span>
             </div>
         </div>
     </fieldset>
@@ -297,7 +299,7 @@ if (count($productTypes) >= 1 && $productTypes[0] == 'virtual' || count($product
             title="<?php echo __('Enable Product'); ?>"
             class="validate-select">
             <option value="1" <?php if ($status == 1) {echo 'selected="selected"';}?>><?php echo __('Enable'); ?></option>
-            <option value="2"<?php if ($status == 2) {echo 'selected="selected"';}?>><?php echo __('Disable'); ?></option>
+            <option value="2" <?php if ($status == 2) {echo 'selected="selected"';}?>><?php echo __('Disable'); ?></option>
         </select>
     </div>
     <div class="fields">
@@ -535,6 +537,7 @@ require([
                 configurableProductFlagCheck = 1;
             }
             var configurableAssociatedProductFlag = 0;
+
             if ($('#configurable_associated_product_flag')) {
                 var configurableAssociatedProductFlag = $('#configurable_associated_product_flag').val();
             }
@@ -561,7 +564,11 @@ require([
         );
     });
     $('#images_list').on('click', '.base_image_container', function (e) {
-        $('#base_image_for_product').html($(this).find('.base_image').clone());
+        $('#base_image_for_product').html(
+            $(this)
+                .find('.base_image')
+                .clone()
+        );
     });
     $(document).on('click', '#btn_save_product', function () {
         productskuVal = $('#sku').val();
@@ -702,7 +709,9 @@ require([
             }
         }
         ?>
-    <div for="selectBaseImage" generated="true" class="mage-error" id="selectBaseImage" style="display: none;"><?php echo __('Please select base image for your product'); ?></div>
+        <div for="selectBaseImage" generated="true" class="mage-error" id="selectBaseImage" style="display: none;">
+            <?php echo __('Please select base image for your product'); ?>
+        </div>
     </div>
     <div class="cssload-jumping" id="image_upload_ajax_loader"
         style="display: none;">
@@ -710,7 +719,9 @@ require([
     </div>
     <input style="display: none;" type="submit" value="submit">
 </form>
-<span class="magenote"><?php echo __('Note: Please add images with same height and width for better visibility.'); ?></span>
+<span class="magenote">
+    <?php echo __('Note: Please add images with same height and width for better visibility.'); ?>
+</span>
 <!-- Product custom option and dynamically add downloadable product data -->
 <script>
 function removeMarketPlaceCustomOption(value) {
@@ -793,9 +804,11 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
                             <label class="required"><em>*</em> <?php echo __('Title'); ?></label>
                         </th>
                         <th class="opt-type">
-                            <label class="required"><em>*</em> <?php echo __('Input Type'); ?></label></th>
+                            <label class="required"><em>*</em> <?php echo __('Input Type'); ?></label>
+                        </th>
                         <th class="opt-req">
-                            <label><?php echo __('Is Required'); ?></label></th>
+                            <label><?php echo __('Is Required'); ?></label>
+                        </th>
                         <th class="a-right">
                             <button id="delete_product_option_XXX" title="<?php echo __('Delete Option'); ?>" type="button"
                                 class="button scalable delete delete-product-option " onclick="removeMarketPlaceCustomOption(this)">
@@ -864,15 +877,15 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
             cellpadding="0" cellspacing="0">
             <tbody>
                 <tr class="headings">
-<?php
-/**
- * Product custom option title.
- * Price
- * Price type
- * SKU
- * Max characters.
- */
-?>
+                    <?php
+                    /**
+                     * Product custom option title.
+                     * Price
+                     * Price type
+                     * SKU
+                     * Max characters.
+                     */
+                    ?>
                     <th class="type-price">
                         <label><?php echo __('Price'); ?></label>
                     </th>
@@ -889,7 +902,8 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
                 <tr>
                     <td>
                         <input type="text" class="input-text validate-number product-option-price product-custom-option-price-val"
-                            id="product_option_CCC_price" name="product[options][CCC][price]" value=""></td>
+                            id="product_option_CCC_price" name="product[options][CCC][price]" value="">
+                    </td>
                     <td>
                         <select name="product[options][CCC][price_type]" id="product_option_CCC_price_type" class="select product-option-price-type" title="">
                             <option value="fixed"><?php echo __('fixed'); ?></option>
@@ -1061,12 +1075,15 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
     <table>
         <tr id="product_option_CCC_select_AAA">
             <td>
-                <input type="hidden" name="product[options][CCC][values][AAA][option_type_id]" value="-1"> <input type="hidden" id="product_option_CCC_select_AAA_is_delete"
+                <input type="hidden" name="product[options][CCC][values][AAA][option_type_id]" value="-1">
+                <input type="hidden" id="product_option_CCC_select_AAA_is_delete"
                     name="product[options][CCC][values][AAA][is_delete]" value="">
-                <input type="text" class="required-entry input-text select-type-title" id="product_option_CCC_select_AAA_title" name="product[options][CCC][values][AAA][title]" value=""></td>
+                <input type="text" class="required-entry input-text select-type-title" id="product_option_CCC_select_AAA_title" name="product[options][CCC][values][AAA][title]" value="">
+            </td>
             <td>
                 <input type="text" class="input-text validate-number product-option-price" id="product_option_CCC_select_AAA_price"
-                    name="product[options][CCC][values][AAA][price]" value=""></td>
+                    name="product[options][CCC][values][AAA][price]" value="">
+            </td>
             <td>
                 <select name="product[options][CCC][values][AAA][price_type]"
                     id="product_option_CCC_select_AAA_price_type"
@@ -1085,7 +1102,7 @@ function addMarketPlaceChildSelectOption(value, sub_option_value) {
                 <span title="Delete row">
                     <button id="delete_select_row_button" title="Delete Row" type="button" class="button delete_select_row_button scalable delete delete-select-row icon-btn"
                         onclick="removeMarketPlaceChildSelectOption(this)" style="">
-                        <span> <span><?php echo __('Delete Row'); ?></span></span>
+                        <span><span><?php echo __('Delete Row'); ?></span></span>
                     </button>
                 </span>
             </td>

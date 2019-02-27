@@ -115,11 +115,11 @@ $nationalShippingAmount = $internationalShippingAmount = '';
             <textarea id="product_description"
                 name="assignproduct[description]" rows="2" cols="15"></textarea>
         </div>
-    <?php
-    /**
-     * Submission of form
-     */
-    ?>
+        <?php
+        /**
+         * Submission of form
+         */
+        ?>
     </fieldset>
     <?php
     /**
@@ -148,7 +148,7 @@ $nationalShippingAmount = $internationalShippingAmount = '';
                 <?php echo $assignproductAttributeCode->getProductAttribute()->getAttributeCode(); ?>
             </th>
             <?php }?>
-       </tr>
+        </tr>
         <?php
         if (!empty($associatedProducts)) {
             foreach ($associatedProducts as $associatedProduct) {
