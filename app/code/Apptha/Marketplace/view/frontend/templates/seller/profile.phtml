@@ -267,32 +267,32 @@ $objectModelManager = \Magento\Framework\App\ObjectManager::getInstance();
 
         <div class="fields">
             <label class="payment_hint required"><h3><?php echo __('Process Payment via Bank/Paypal Account'); ?></h3></label>
-        <div class="field payment-snipt required">
+            <div class="field payment-snipt required">
 
-        <div class="input-box market_place_payment_process required">
-            <label for="bank_pay" class="label"><?php echo __('Bank Payment'); ?></label>
-            <i><?php echo __('[Please enter your Account number, Bank Name with Branch and IFSC code]'); ?></i>
-            <textarea name="bank_payment" id="bank_payment" class="input-text"><?php echo $sellerDetails->getBankPayment(); ?></textarea>
-        </div>
-        <div class="clear"></div>
-            <div class="input-box market_place_payment_process required">
-                <label for="paypal_pay"><?php echo __('Paypal Id'); ?> </label>
-                <input type="email" name="paypal_id" id="paypal_id"
-                    value="<?php echo $sellerDetails->getPaypalId(); ?>" value=""
-                    class="input-text ">
-                <div class="validation-advice" id="advice-required-entry-paypal_id"></div>
+                <div class="input-box market_place_payment_process required">
+                    <label for="bank_pay" class="label"><?php echo __('Bank Payment'); ?></label>
+                    <i><?php echo __('[Please enter your Account number, Bank Name with Branch and IFSC code]'); ?></i>
+                    <textarea name="bank_payment" id="bank_payment" class="input-text"><?php echo $sellerDetails->getBankPayment(); ?></textarea>
+                </div>
+                <div class="clear"></div>
+                <div class="input-box market_place_payment_process required">
+                    <label for="paypal_pay"><?php echo __('Paypal Id'); ?> </label>
+                    <input type="email" name="paypal_id" id="paypal_id"
+                        value="<?php echo $sellerDetails->getPaypalId(); ?>" value=""
+                        class="input-text ">
+                    <div class="validation-advice" id="advice-required-entry-paypal_id"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <input type="hidden" name="store_url"
-        value="<?php echo $sellerDetails->getStoreUrl(); ?>" />
-    <div class="fields">
-        <div class="field meta_keyword ">
-            <input id="show_profile_link" onclick="updateShowProfileLink()"
-                type="checkbox" name="show_profile"
-                value="<?php echo $sellerDetails->getShowProfile(); ?>"
-                <?php if ($sellerDetails->getShowProfile() == 1) {echo 'checked';}?> />
-            <label for="show_profile_link">Display your profile link in product detail page</label>
+        <input type="hidden" name="store_url"
+            value="<?php echo $sellerDetails->getStoreUrl(); ?>" />
+        <div class="fields">
+            <div class="field meta_keyword ">
+                <input id="show_profile_link" onclick="updateShowProfileLink()"
+                    type="checkbox" name="show_profile"
+                    value="<?php echo $sellerDetails->getShowProfile(); ?>"
+                    <?php if ($sellerDetails->getShowProfile() == 1) {echo 'checked';}?> />
+                <label for="show_profile_link">Display your profile link in product detail page</label>
             </div>
         </div>
         <button type="submit" class="button validation-passed"
