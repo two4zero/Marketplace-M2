@@ -490,7 +490,7 @@ require([
         });
     });
 
-    $("#image_upload_form").on('submit', (function (e) {
+    $("#image_upload_form").on('submit', function (e) {
         e.preventDefault();
         var imgVal = $('#upload_product_images').val();
 
@@ -510,7 +510,7 @@ require([
                 processData: false
             });
         }
-    }));
+    });
     $("#upload_product_images").change(function () {
         $('#image_upload_form').submit();
     });
